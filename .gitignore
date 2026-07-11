@@ -1,0 +1,43 @@
+# --- Personal data — never commit ---
+config.json
+config/config.json
+
+# Real pipeline and profile data (keep only the .example versions)
+board_data.json
+Application_Form_Profile.md
+scout_feed.js
+scout_targets.json
+Outreach_Map*.md
+Recruiter_Email_Drafts.md
+Warm_Network_Outreach_Playbook.md
+Notes_*.md
+Personal_*.md
+Skills_to_Roles_Matrix*.xlsx
+fit/skills.json
+config/company_verdicts.json
+
+# Tailored application materials
+*Resume*.docx
+*CoverLetter*.docx
+*Resume*.pdf
+*CoverLetter*.pdf
+
+# Project-specific (as-built) spec contains real names/paths — keep private
+Reverse_Recruiter_Project_Spec.docx
+
+# Rendered/intermediate
+*.pdf
+page-*.jpg
+pg-*.jpg
+sp-*.jpg
+
+# OS / editor
+.DS_Store
+*.swp
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Run activity logs (may contain company names)
+logs/

@@ -1,0 +1,47 @@
+{
+  "_comment": [
+    "YOUR EVIDENCE INVENTORY. Copy to fit/skills.json (gitignored) and fill it in.",
+    "",
+    "THE 2x2. Each skill has EMPLOYER evidence (you did it at a job) and/or PORTFOLIO",
+    "evidence (you can show the artifact), crossed with EXPLICIT (it leads a resume",
+    "bullet) or IMPLICIT (it is transferable and supports one).",
+    "",
+    "  employer + portfolio   1.00   unassailable - did it at work AND can show the code",
+    "  portfolio only         0.75   THE RARE CLAIM",
+    "  employer only          0.40   the common claim",
+    "  neither                0.00   an unevidenced claim is worth nothing",
+    "",
+    "PORTFOLIO-ONLY OUTRANKS EMPLOYER-ONLY, and this is the part people get backwards.",
+    "Employer evidence proves the COMMON thing - plenty of candidates have held that",
+    "title. The portfolio proves the RARE thing - the artifact your competition cannot",
+    "produce. If you weight it the other way round, your rubric rewards being ordinary.",
+    "",
+    "The uncomfortable use of this file: the skills with EMPLOYER evidence and ZERO",
+    "artifacts are usually the career you are trying to LEAVE. Seeing them scored 0.40",
+    "while your portfolio-only skills score 0.75 is the point, not a bug.",
+    "",
+    "EMPTY MEANS NO EVIDENCE. Do not write '-' or 'n/a' as a placeholder. A non-empty",
+    "string is TRUTHY and will be counted as real evidence, inflating claims you cannot",
+    "back. Leave it empty. (This was a real bug, found the hard way.)"
+  ],
+  "skills": [
+    {
+      "name": "Example Governance Skill",
+      "kind": "explicit",
+      "employers": ["Employer A"],
+      "artifacts": "my-open-source-project"
+    },
+    {
+      "name": "Example Rare Skill",
+      "kind": "explicit",
+      "employers": [],
+      "artifacts": "the-thing-only-you-built"
+    },
+    {
+      "name": "Example Legacy Skill",
+      "kind": "implicit",
+      "employers": ["Employer B"],
+      "artifacts": ""
+    }
+  ]
+}

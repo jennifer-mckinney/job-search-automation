@@ -1,0 +1,8 @@
+{
+  "_comment": "Example target-company list. Replace with your own. No personal data belongs here.",
+  "targets": [
+    { "company": "Acme AI", "careers_url": "https://acme.example/careers", "priority": "high" },
+    { "company": "Globex", "careers_url": "https://globex.example/jobs", "priority": "medium" },
+    { "company": "Initech", "careers_url": "https://initech.example/careers", "priority": "medium" }
+  ]
+}

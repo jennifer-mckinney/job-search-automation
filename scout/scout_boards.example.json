@@ -1,0 +1,18 @@
+{
+  "_comment": "Example niche board configuration. Replace with your own curated sources. No personal data belongs here.",
+  "responsible_ai_and_governance": [
+    "https://example.org/ai-governance-jobs",
+    "https://example.org/responsible-ai-board"
+  ],
+  "women_and_leadership_networks": [
+    "https://example.org/women-in-tech-jobs",
+    "https://example.org/executive-women-network"
+  ],
+  "executive_and_fractional": [
+    "https://example.org/fractional-exec-roles",
+    "https://example.org/executive-search-listings"
+  ],
+  "communities": [
+    "https://example.org/community-jobs-channel"
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0.0",
+  "_comment": "Copy this file to config.json and fill in your values. config.json is gitignored. No personal data belongs in config.example.json.",
+  "operator": {
+    "name": "Your Name",
+    "email": "you@example.com",
+    "phone": "",
+    "linkedin": "https://www.linkedin.com/in/your-handle",
+    "location_line": "Open to remote",
+    "work_authorization": "Authorized to work for any employer",
+    "requires_sponsorship": false
+  },
+  "search": {
+    "target_role_types": ["R1", "R2", "R3"],
+    "target_role_type_notes": "Define your own role-type taxonomy, e.g. R1=Product Leadership, R2=Governance, etc.",
+    "resume_variants": ["V1", "V2", "V3", "V4"]
+  },
+
+  "_criteria_comment": [
+    "THE ACCEPTANCE CRITERIA (fit/role_fit.py). These are YOUR values - the defaults",
+    "below are placeholders, not advice. ONE NUMERIC SYSTEM: every score in this",
+    "system is on [0.00, 1.00]. It is asserted in code, not hoped for.",
+    "",
+    "HARD GATES run first and are unrescuable by score. Then the score. Then RANK and",
+    "cut to your weekly budget. Clearing the floor is permission to be RANKED, not",
+    "permission to apply.",
+    "",
+    "Why apply_floor is 0.60 and not 0.80: a job description is a WISH LIST. Nobody",
+    "meets 100% of one. Scoring against a wish list and demanding 0.80 rejects roles you",
+    "would win. Let the GATES disqualify; let the SCORE only rank what survives."
+  ],
+  "criteria": {
+    "apply_floor": 0.60,
+    "comp_floor": 0,
+    "comp_floor_note": "0 disables the gate. An unstated salary is always a FLAG, never a reject - most boards omit it, and absence of evidence is not evidence.",
+    "freshness_hours": 168,
+    "level_words": ["principal", "director", "head of", "vp", "vice president", "chief"],
+    "level_words_note": "Empty list disables the level gate.",
+    "location_ok": ["remote", "distributed", "work from home"],
+    "weights": {
+      "intersection": 0.35,
+      "track": 0.25,
+      "evidence": 0.25,
+      "mission": 0.15,
+      "coding_penalty": 0.15
+    },
+    "tracks": {
+      "primary":   { "weight": 1.00, "keywords": ["your top target, e.g. ai governance"] },
+      "secondary": { "weight": 0.75, "keywords": ["your second target"] },
+      "fallback":  { "weight": 0.25, "keywords": ["the career you are LEAVING - it matches, it should not excite"] }
+    },
+    "intersection": {
+      "note": "YOUR THESIS: the rare combination only you can claim. Scores 1.00 when BOTH sides are present, and much less when only one is.",
+      "side_a": ["governance", "policy", "risk", "compliance"],
+      "side_b": ["build", "architect", "implement", "hands-on", "engineering"]
+    },
+    "mission_signals": {
+      "note": "Does the WORK align. Each signal is worth an equal share. This is NOT the company screen - see values_veto below.",
+      "example_signal": ["keyword", "another keyword"]
+    },
+    "coding_penalty_keywords": ["software engineer", "live coding", "coding interview"],
+    "excluded_sectors": {
+      "example_sector": ["keyword that appears in such a JD"]
+    }
+  },
+
+  "_values_veto_comment": [
+    "THE COMPANY SCREEN (fit/values_veto.py). A GATE, not a scoring component.",
+    "",
+    "You can match 99% of a job description and still not want to work there. A score",
+    "component can only DISCOUNT; a gate makes the role INVISIBLE. That is the difference,",
+    "and it is why this is not just another weight.",
+    "",
+    "THREE STATES, and the agent NEVER breaks the tie:",
+    "  PASS    (>= pass_at)  -> proceed",
+    "  FAIL    (<  fail_at)  -> suppressed, never shown again, but LOGGED for analytics",
+    "  UNKNOWN (in between, or too little researched) -> ESCALATED TO YOU. Never guessed.",
+    "",
+    "TWO DISCIPLINE RULES, ENFORCED IN CODE - they cannot be forgotten:",
+    "  1. SILENCE IS NOT A PASS. An unresearched signal is null, NOT 'good'. More than",
+    "     max_nulls unknowns forces UNKNOWN. A company with no public record would",
+    "     otherwise sail through at a fake 1.00. Absence of evidence is not evidence.",
+    "  2. NO SOURCE, NO CLAIM. An adverse finding about a NAMED INDIVIDUAL requires a",
+    "     citable URL, or the code RAISES. If you suspect but cannot cite, return null -",
+    "     that yields UNKNOWN, and a human rules. The system may NEVER manufacture a",
+    "     FAIL by inference. This concerns real people."
+  ],
+  "values_veto": {
+    "enabled": true,
+    "pass_at": 0.70,
+    "fail_at": 0.40,
+    "max_nulls": 2,
+    "signals": {
+      "leadership_integrity": 0.25,
+      "litigation_enforcement": 0.20,
+      "labor_practices": 0.20,
+      "responsible_practices": 0.15,
+      "representation": 0.10,
+      "funding_ownership": 0.05,
+      "employee_sentiment": 0.05
+    },
+    "person_signals": ["leadership_integrity"],
+    "person_signals_note": "Signals about NAMED HUMAN BEINGS. An adverse finding here REQUIRES a citable URL or Signal() raises. This is the anti-defamation guard.",
+    "hard_fails": {
+      "discrimination_judgment": "confirmed discrimination judgment or enforcement action",
+      "leadership_integrity_finding": "sourced adverse finding about leadership",
+      "exploitation": "exploitation of vulnerable or marginalized people"
+    },
+    "excluded_companies": [
+      {
+        "company": "ExampleCorp",
+        "aliases": ["Example Corporation", "ExampleCo Labs"],
+        "reason": "why you will not work here"
+      }
+    ],
+    "excluded_companies_note": "A BLOCKLIST, NOT A VERDICT. Exclusion means exclusion. evaluate() and record() REFUSE on an excluded company, so no amount of research can silently overturn one. Aliases catch subsidiaries; corporate suffixes and TLDs are normalised away, so 'ExampleCorp.com, Inc.' still matches."
+  },
+
+  "sources": {
+    "job_boards": ["dice", "indeed"],
+    "niche_boards_file": "scout/scout_boards.json",
+    "targets_file": "scout/scout_targets.json"
+  },
+  "ats_routing": {
+    "guest_apply": ["greenhouse", "lever", "ashby", "dayforce"],
+    "account_wall": ["workday", "icims", "taleo"]
+  },
+  "sla_days": {
+    "applied": { "amber": 7, "red": 10 },
+    "screening": { "amber": 7, "red": 14 },
+    "interview": { "amber": 10, "red": 21 }
+  },
+  "targets": {
+    "applications_per_week": 8,
+    "outreach_per_week": 5
+  },
+  "schedule": {
+    "cron": "0 7,12,16 * * *"
+  },
+  "integrations": {
+    "calendar": "Job Search",
+    "reminders_lists": ["Job Search", "Job Search Daily"],
+    "mail_mode": "drafts-only",
+    "notifications": true
+  }
+}
